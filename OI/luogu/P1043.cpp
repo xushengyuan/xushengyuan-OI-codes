@@ -61,8 +61,8 @@ int dp_min(int data_temp[])
 }
 int main()
 {
-    freopen("in.txt","r",stdin);
-    freopen("out.txt","w",stdout);
+    //freopen("in.txt","r",stdin);
+    //freopen("out.txt","w",stdout);
     cin>>n>>m;
     // cout<<"n="<<n<<" m="<<m<<endl;
     int i;
