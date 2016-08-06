@@ -9,6 +9,7 @@
 using namespace std;
 int n,m,Max,Min;
 int sum[201],f[200][20],g[200][20],num[201];
+int tot=0;
 void dp(int a[])
 {
     for (int i=1; i<=n; i++) sum[i]=sum[i-1]+a[i];    
@@ -26,6 +27,7 @@ void dp(int a[])
             for (int k=j-1; k<=i-1; k++)  
             {
                 f[i][j]=max(f[i][j],f[k][j-1]*(((sum[i]-sum[k])%10+10)%10));
+                cout<<tot++<<' '<<f[i][j]<<endl;
                 g[i][j]=min(g[i][j],g[k][j-1]*(((sum[i]-sum[k])%10+10)%10));
             }
     Max=max(Max,f[n][m]);   

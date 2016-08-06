@@ -9,7 +9,7 @@ int tot=0;
 int dp_max(int x)
 {
     int i,j,k,max_sum=0;//f[i][j]为前i个数分成j份获得的最大价值
-    memset(f,-1,100*100*sizeof(int));
+    memset(f,-1,sizeof(int));
     for(i=0;i<n;i++)
         f[i][1]=(data_sum[x][x+i]%10+10)%10;
     f[0][0]=1;
@@ -37,7 +37,7 @@ int dp_min()
 int main()
 {
     freopen("in.txt","r",stdin);
-    //freopen("out.txt","w",stdout);
+    freopen("out.txt","w",stdout);
     cin>>n>>m;
     cout<<"n="<<n<<" m="<<m<<endl;
     int i;
