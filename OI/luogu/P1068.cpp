@@ -15,18 +15,31 @@ void swap(int a,int b)
     honoko[b]=t2;
     return ;
 }
+bool cp(int num,int f)
+{
+    if(honoko[num]>honoko[f])
+        return true;
+    else if(honoko[num]<honoko[f])
+        return false;
+    else if(honoko[num]==honoko[f])
+        if(num>f)
+            return true;
+        else
+            return false;
+}
 void qsort(int left,int right)
 {
-    int f;
+    int f,f_num;
     int rtemp,ltemp;
     ltemp=left;
     rtemp=right;
     f=honoko[(left+right)/2];
+    f_num=(left+right)/2;
     while(ltemp<rtemp)
     {
-        while(honoko[ltemp]>f)
+        while(cp(ltemp,f_num))
             ++ltemp;
-        while(honoko[rtemp]<f)
+        while(!cp(rtemp,f_num))
             --rtemp;
         if(ltemp<=rtemp)
         {
@@ -54,7 +67,7 @@ int main()
     qsort(0,nozomi-1);
     /*for(rin=0;rin<nozomi;rin++)
         cout<<umi[rin]<<' '<<honoko[rin]<<endl;*/
-    int kotori=1.5*maki;
+    int kotori=(int)(1.5*maki);
     hanayo=(int)(maki*1.5);
     for(int rin=kotori;rin<nozomi;rin++)
         if(honoko[rin]==honoko[kotori-1])
