@@ -45,14 +45,22 @@ void qsort(int left,int right)
 }
 int main()
 {
-    freopen("in.txt","r",stdin);
-    freopen("out.txt","w",stdout);
+    //freopen("in.txt","r",stdin);
+    //freopen("out.txt","w",stdout);
     cin>>nozomi>>maki;
     int rin,hanayo;
     for(rin=0;rin<nozomi;rin++)
         cin>>umi[rin]>>honoko[rin];
     qsort(0,nozomi-1);
-    for(rin=0;rin<nozomi;rin++)
+    /*for(rin=0;rin<nozomi;rin++)
+        cout<<umi[rin]<<' '<<honoko[rin]<<endl;*/
+    int kotori;
+    kotori=honoko[(int)(maki*1.5)];
+    hanayo=0;
+    while(honoko[hanayo]>=kotori)
+        hanayo++;
+    cout<<kotori<<' '<<hanayo<<endl;
+    for(rin=0;rin<hanayo;rin++)
         cout<<umi[rin]<<' '<<honoko[rin]<<endl;
     return 0;
 }
