@@ -3,8 +3,19 @@
 #include<cstring>
 #include<cstdio>
 using namespace std;
-int nozomi,maki,umi[5000],honoko[5000];
-void swap(int a,int b)
+int nozomi,maki;
+struct n
+{
+    int umi;
+    int honoko;
+}nico[5000];
+bool cp(n a,n b)
+{
+    if(a.honoko==b.honoko)
+        return a.honoko>b.honoko;
+    return a.honoko>b.honoko;
+}
+/*void swap(int a,int b)
 {
     int t1,t2;
     t1=umi[a];
@@ -14,18 +25,6 @@ void swap(int a,int b)
     umi[b]=t1;
     honoko[b]=t2;
     return ;
-}
-bool cp(int num,int f)
-{
-    if(honoko[num]>honoko[f])
-        return true;
-    else if(honoko[num]<honoko[f])
-        return false;
-    else if(honoko[num]==honoko[f])
-        if(num>f)
-            return true;
-        else
-            return false;
 }
 void qsort(int left,int right)
 {
@@ -54,26 +53,26 @@ void qsort(int left,int right)
         qsort(left,ltemp-1);
     if(ltemp<right)
         qsort(rtemp+1,right);
-    return ;
-}
+}*/
 int main()
 {
-    freopen("in.txt","r",stdin);
-    freopen("out.txt","w",stdout);
+    //freopen("in.txt","r",stdin);
+    //freopen("out.txt","w",stdout);
     cin>>nozomi>>maki;
-    int rin,hanayo,nico;
+    //cout<<nozomi<<maki;
+    int rin,hanayo;
     for(rin=0;rin<nozomi;rin++)
-        cin>>umi[rin]>>honoko[rin];
-    qsort(0,nozomi-1);
+        cin>>nico[rin].umi>>nico[rin].honoko;
+    sort(nico,nico+nozomi,cp);
+    //cout<<nozomi<<maki;
     /*for(rin=0;rin<nozomi;rin++)
         cout<<umi[rin]<<' '<<honoko[rin]<<endl;*/
     int kotori=(int)(1.5*maki);
-    hanayo=(int)(maki*1.5);
     for(int rin=kotori;rin<nozomi;rin++)
-        if(honoko[rin]==honoko[kotori-1])
+        if(nico[rin].honoko==nico[kotori-1].honoko)
             kotori++;
-    cout<<honoko[kotori-1]<<' '<<kotori<<endl;
+    cout<<nico[kotori-1].honoko<<' '<<kotori<<endl;
     for(rin=0;rin<kotori;rin++)
-        cout<<umi[rin]<<' '<<honoko[rin]<<endl;
+        cout<<nico[rin].umi<<' '<<nico[rin].honoko<<endl;
     return 0;
 }
