@@ -48,19 +48,19 @@ int main()
     freopen("in.txt","r",stdin);
     freopen("out.txt","w",stdout);
     cin>>nozomi>>maki;
-    int rin,hanayo;
+    int rin,hanayo,nico;
     for(rin=0;rin<nozomi;rin++)
         cin>>umi[rin]>>honoko[rin];
     qsort(0,nozomi-1);
     /*for(rin=0;rin<nozomi;rin++)
         cout<<umi[rin]<<' '<<honoko[rin]<<endl;*/
-    int kotori;
-    kotori=honoko[(int)(maki*1.5)];
-    hanayo=0;
-    while(honoko[hanayo]>=kotori)
-        hanayo++;
-    cout<<kotori<<' '<<hanayo<<endl;
-    for(rin=0;rin<hanayo;rin++)
+    int kotori=1.5*maki;
+    hanayo=(int)(maki*1.5);
+    for(int rin=kotori;rin<nozomi;rin++)
+        if(honoko[rin]==honoko[kotori-1])
+            kotori++;
+    cout<<honoko[kotori-1]<<' '<<kotori<<endl;
+    for(rin=0;rin<kotori;rin++)
         cout<<umi[rin]<<' '<<honoko[rin]<<endl;
     return 0;
 }
