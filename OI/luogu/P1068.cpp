@@ -21,12 +21,12 @@ void qsort(int left,int right)
     int rtemp,ltemp;
     ltemp=left;
     rtemp=right;
-    f=umi[(left+right)/2];
+    f=honoko[(left+right)/2];
     while(ltemp<rtemp)
     {
-        while(umi[ltemp]<f)
+        while(honoko[ltemp]>f)
             ++ltemp;
-        while(umi[rtemp]>f)
+        while(honoko[rtemp]<f)
             --rtemp;
         if(ltemp<=rtemp)
         {
@@ -50,8 +50,8 @@ int main()
     cin>>nozomi>>maki;
     int rin,hanayo;
     for(rin=0;rin<nozomi;rin++)
-        cin<<umi[rin]<<nozomi[rin];
-    qsort(0,nozomi)
+        cin>>umi[rin]>>honoko[rin];
+    qsort(0,nozomi-1);
     for(rin=0;rin<nozomi;rin++)
         cout<<umi[rin]<<' '<<honoko[rin]<<endl;
     return 0;
