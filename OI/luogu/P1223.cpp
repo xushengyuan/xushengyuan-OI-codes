@@ -1,28 +1,39 @@
 #include<iostream>
 #include<algorithm>
-#include<stdin>
+#include<cstdio>
 #define MAX_N 1000
 using namespace std;
-int n,data[MAX_n],sum=0;
-pair<int,int> p;
-priority_queue<p,vector<p>,greater<p>> pqueue;
+int n;
+double sum=0.0;
+struct people
+{
+    int num,water;
+}data[MAX_N];
+bool cmp(people a,people b)
+{
+    return a.water<b.water;
+}
 int main()
 {
-    freopen("in.txt","r",stdin);
-    freopen("out.txt","w",stdout);
-    int i,j;
+    //freopen("in.txt","r",stdin);
+    //freopen("out.txt","w",stdout);
+    int i,j,pre=0;
     cin>>n;
     for(i=0;i<n;i++)
     {
-        cin>>data[i];
-        pqueue.push()
-    }
+        cin>>data[i].water;
+        data[i].num=i+1;
+    }   
+    sort(&data[0],&data[n],cmp);
     for(i=0;i<n;i++)
     {
-        sum+=pqueue.top()*n-i-1;
-        pqueue.pop();
-        sum/=n;
+        cout<<data[i].num<<' ';
+        sum+=pre;
+        pre+=data[i].water;
     }
-
+    cout<<endl;
+    double x;
+    x=sum/n;
+    printf("%.2f",sum/n);
     return 0;
 }
