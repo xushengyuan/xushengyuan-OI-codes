@@ -1,14 +1,16 @@
+
 #include <iostream>
 #include <algorithm>
 #include <cstring>
 #include <cstdio>
+using namespace std;
 int n,na,nb;
 int d[5][5]={{0,-1,1,1,-1},{1,0,-1,1,-1},{-1,1,0,-1,1},{-1,-1,1,0,1},{1,1,-1,-1,0}};
 int a[210],b[210],suma=0,sumb=0;
 int main()
 {
     freopen("in.txt","r",stdin);
-    freopen("out.txt","w",stdout)
+    freopen("out.txt","w",stdout);
     int k,i,j;
     cin>>n>>na>>nb;
     for(i=0;i<na;i++)

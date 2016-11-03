@@ -1,5 +1,0 @@
-﻿  Console.cpp
-c:\users\99610\desktop\codes\23333\console\console\console.cpp(16): warning C4101: “i”: 未引用的局部变量
-c:\users\99610\desktop\codes\23333\console\console\console.cpp(29): warning C4101: “i”: 未引用的局部变量
-  Console.vcxproj -> C:\Users\99610\Desktop\codes\23333\Console\Debug\Console.exe
-  Console.vcxproj -> C:\Users\99610\Desktop\codes\23333\Console\Debug\Console.pdb (Full PDB)
