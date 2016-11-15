@@ -8,14 +8,14 @@ int sum=2147483647,maki[200010],kke[200010],s[200010];
 int tmp;
 int main()
 {
-    freopen("in.txt","r",stdin);
-    freopen("out.txt","w",stdout);
-    memset(kke,0,sizeof(int))
-    int i,j,t,flag,t2=0;
+    //freopen("in.txt","r",stdin);
+    //freopen("out.txt","w",stdout);
+    memset(kke,0,sizeof(int));
+    int i,j,t,flag,t2;
     cin>>n;
-    for(i=1;i<n;i++)
+    for(i=1;i<=n;i++)
         cin>>maki[i];
-    for(i=1;i<n;i++)
+    for(i=1;i<=n;i++)
     {
         if(kke[i]!=0)
             continue;
@@ -27,6 +27,7 @@ int main()
             kke[t]=tmp;
             s[t]=i;
             t=maki[t];
+            tmp++;
             if(tmp>sum)
             {
                 flag=1;
@@ -39,5 +40,6 @@ int main()
         sum=min(sum,t2);
     }
     cout<<sum;
+    getchar();
     return 0;
 }
