@@ -1,5 +1,5 @@
 vector<int> adj[N];
-int low[N],dfn[N],id[N],sta[N],idx,top,scnt;//scnt´Ó1¿ªÊ¼
+int low[N],dfn[N],id[N],sta[N],idx,top,scnt;//scntä»Ž1å¼€å§‹
 bool insta[N];
 void tarjan(int u)
 {
@@ -8,7 +8,7 @@ void tarjan(int u)
 	low[u]=dfn[u]=++idx;
 	for(int i=0; i<(int)adj[u].size(); i++)
 	{
-		int v=adj[u][i];//ÓÃvector´æµÄµã
+		int v=adj[u][i];//ç”¨vectorå­˜çš„ç‚¹
 		if(!dfn[v])
 		{
 			tarjan(v);
@@ -23,8 +23,8 @@ void tarjan(int u)
 		do
 		{
 			tmp=sta[--top];
-			//vis[tmp]=0;ÕâÀïÐ´´íÁË¡£
-			insta[tmp]=0;//Ó¦¸ÃÊÇ°ÑÔÚÕ»ÖÐµÄ±ê¼ÇÈ¡Ïû¡£
+			//vis[tmp]=0;è¿™é‡Œå†™é”™äº†ã€‚
+			insta[tmp]=0;//åº”è¯¥æ˜¯æŠŠåœ¨æ ˆä¸­çš„æ ‡è®°å–æ¶ˆã€‚
 			id[tmp]=scnt;
 		}
 		while(tmp!=u);
