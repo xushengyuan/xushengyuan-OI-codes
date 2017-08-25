@@ -1,60 +1,64 @@
-#include<iostream>
-#include<algorithm>
-#include<cstdio>
+//Date:2017/8/10
+//OJ:luogu
+//Problem:1064
+//By:xushengyuan
+#include <bits/stdc++.h>
 using namespace std;
-int f[32000],v[60],w[60],q[60];
+int f[3300]={0},v[60],w[60],child[60][3],child_n[60]={0};
 int n,m;
+bool ischild[60]={false};
 int main()
 {
-    freopen("in.txt","r",stdin);
-    freopen("out.txt","w",stdout);
-    int i,j,k;
-    int tempA1,tempA2,tempB1,tempB2;
-    cin>>n>>m;
-    for(i=0;i<m;i++)
-        cin>>w[i]>>v[i]>>q[i];
-    for(i=0;i<m;i++)
+    #ifdef _DEBUG
+        freopen("in.txt","r",stdin);
+        freopen("out.txt","w",stdout);
+    #endif
+    int t;
+    cin >>n>>m;
+    n/=10;
+    for(int i=0;i<m;i++)
     {
-        tempA1=0;
-        tempA2=0;
-        tempB1=0;
-        tempB2=0;
-        if(q[i]==0)
+        cin >>v[i]>>w[i]>>t;
+        v[i]/=10;
+        if(t!=0)
         {
-            k=i+1;
-            while(k<m && q[k]!=i)
-                k++;
-            tempB1=k;
-            tempA1=1;
-            k=tempB1+1;
-            while(k<m && q[k]!=i)
-                k++;
-            tempB2=k;
-            tempA2=1;
-            for(j=n;j>w[i];j--)  
-            {         
-                f[j]=max(f[j-w[i]]+w[i]*v[i],f[j]);  
-                f[j]=max(f[j-w[i]]+w[i]*v[i],f[j]);    //不选附件
-
-                if((j-w[i]-w[tempB1])>=0
-                    &&tempA1==1)                           
-                    f[j]=max(f[j-w[i]-w[tempB1]]
-                    +w[i]*v[i]+w[tempB1]*v[tempB1],f[j]); //选第一件附件
-
-                if((j-w[i]-w[tempB2])>=0
-                    &&tempA2==1)                                             
-                    f[j]=max(f[j-w[i]-w[tempB2]]
-                    +w[i]*v[i]+w[tempB2]*v[tempB2],f[j]);  //选第二件附件
-
-                if((j-w[i]-w[tempB1]-w[tempB2])>=0
-                    &&tempA1==1
-                    &&tempA2==1)                                             
-                    f[j]=max(f[j-w[i]-w[tempB1]-w[tempB2]]  
-                    +w[i]*v[i]+w[tempB1]*v[tempB1]
-                    +w[tempB2]*v[tempB2],f[j]);           //选两件附件
-            }
+            child[t-1][child_n[t-1]++]=i;
+            ischild[i]=true;
         }
     }
-    cout<<f[n];
+    for(int i=0;i<m;i++)
+    {
+        if(ischild[i]) continue;
+        for(int j=n;j>=v[i];j--)   
+        {
+            f[j]=max(f[j],f[j-v[i]]+w[i]*v[i]);
+
+            if(child_n[i]>0 && j>=v[i]+v[child[i][0]])
+                f[j]=max(
+                f[j],
+                f[j-v[i]-v[child[i][0]]]+
+                w[i]*v[i]+
+                w[child[i][0]]*v[child[i][0]]);
+            
+            if(child_n[i]>1 && j>=v[i]+v[child[i][1]])
+                f[j]=max(
+                f[j],
+                f[j-v[i]-v[child[i][1]]]+
+                w[i]*v[i]+
+                w[child[i][1]]*v[child[i][1]]);
+
+            if(child_n[i]>1 && j>=v[i]+v[child[i][0]]+v[child[i][1]])
+                f[j]=max(
+                f[j],
+                f[j-v[i]-v[child[i][0]]-v[child[i][1]]]+
+                w[i]*v[i]+
+                w[child[i][0]]*v[child[i][0]]+
+                w[child[i][1]]*v[child[i][1]]);
+        }    
+    }
+    int mx=-1;
+    for(int i=1;i<=n;i++)
+        mx=max(mx,f[i]);
+    cout <<mx*10;
     return 0;
 }

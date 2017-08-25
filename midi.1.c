@@ -6,7 +6,9 @@
 //-----------------------------------------------------------------------------
 #include<stdio.h>
 #include<malloc.h>
+#include<iostream>
 
+#define MAXN_DURING 300
 //统一类型长度
 typedef signed int      MIDIInt,*MIDIIntP;
 typedef signed char     MIDIInt8,*MIDIInt8P;
@@ -166,11 +168,11 @@ ProcEvent:  if(bEvent <= 0x7F)
 
                 READ(bNote);//音符
                 READ(bVel); //力度
-
-                fprintf(stdout,"%u%s ",
-                    dwDelay,
-                    NoteToString(bNote)//音高
-                    );//力度
+                //if(dwDelay <= MAXN_DURING)
+                    fprintf(stdout,"%u%s ",
+                        dwDelay,
+                        NoteToString(bNote)//音高
+                        );//力度
             }
             else if(bEvent <= 0x9F)
             {//0x90到0x9F:按下音符
@@ -179,7 +181,7 @@ ProcEvent:  if(bEvent <= 0x7F)
                 READ(bNote);//音符
                 READ(bVel); //力度
 
-            if(dwDelay!=0)
+            if(dwDelay!=0 && dwDelay <= MAXN_DURING)
                 fprintf(stdout,"%u- ",
                     
                     dwDelay
@@ -449,14 +451,15 @@ size_t ReadStringAndPrint(FILE*fp,size_t szLength)
 //-----------------------------------------------------------------------------
 int main(int argc,char**argv)
 {
-    if(argc<2)
+    freopen("mid_out.txt","w",stdout);
+    int n;
+    char str[100];
+    std::cin >>n;
+    for(int i=0;i<n;i++)
     {
-        fprintf(stderr,
-            "Usage:\n"
-            "%s midifile.mid\n",argv[0]?argv[0]:"MIDIFile");
-        return 1;
+        sprintf(str,"data\\%d.mid",i);
+        ParseMIDI(str);
     }
-
-    ParseMIDI(argv[1]);
+    //system("pause");
     return 0;
 }
