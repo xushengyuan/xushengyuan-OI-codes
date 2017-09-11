@@ -28,20 +28,25 @@ int find(int p)
 }
 void kru()
 {
+	int sum=0;
 	init_uni();
-	for(int i=0;i<n-1;i++)
+	for(int i=0;i<m;i++)
 	{
 		int dad_u=find(edges[i].u),dad_v=find(edges[i].v);
 		if(dad_u == dad_v)
 			continue;
+		sum++;
 		dad[dad_u]=dad_v;
 		add_edge(edges[i].u,edges[i].v,edges[i].w);
+		if(sum>=n-1)
+			return ;
 	}
 	return ;
 }
 void add_edge(int u,int v,int w)
 {
 	_map[u].push_back({v,w});
+	_map[v].push_back({u,w});
 	return ;
 }
 int read_int()
