@@ -170,7 +170,7 @@ ProcEvent:  if(bEvent <= 0x7F)
                 READ(bVel); //力度
                 //if(dwDelay <= MAXN_DURING)
                     fprintf(stdout,"%u%s ",
-                        dwDelay,
+                        dwDelay*480/midiHeader.wTicksPerCrotchet,
                         NoteToString(bNote)//音高
                         );//力度
             }
@@ -181,10 +181,10 @@ ProcEvent:  if(bEvent <= 0x7F)
                 READ(bNote);//音符
                 READ(bVel); //力度
 
-            if(dwDelay!=0 && dwDelay <= MAXN_DURING)
+            if(dwDelay!=0 )
                 fprintf(stdout,"%u- ",
                     
-                    dwDelay
+                    dwDelay*480/midiHeader.wTicksPerCrotchet
                     );//力度
             }
             else if(bEvent <= 0xAF)
@@ -305,10 +305,9 @@ ProcEvent:  if(bEvent <= 0x7F)
                         //速度是24位整数，一个四分音符的微秒数。
                         READ(bVelocity1);
                         READ(bVelocity2);
-                        READ(bVelocity3);
-
-                        //而且是Big-Endian
+                        READ(bVelocity3)
                         
+                        //而且是Big-Endian
                     }
                     break;
                 case 0x58://节拍
