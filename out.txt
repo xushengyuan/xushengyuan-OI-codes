@@ -1,2 +1,1 @@
-Divisible
-Not divisible
+48
