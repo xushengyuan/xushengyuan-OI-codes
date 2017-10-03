@@ -5,8 +5,8 @@ void Dijkstra(int s, int t)
     dis[s] = 0;
     for (int i = 0; i < n; ++i)
     {
-        int p = 0;  // Ä¬ÈÏ¶¥µã±àºÅ1~n
-        for (int j = 1; j <= n; ++j)  // ¿ÉÓÅ»¯
+        int p = 0;  // é»˜è®¤é¡¶ç‚¹ç¼–å·1~n
+        for (int j = 1; j <= n; ++j)  // å¯ä¼˜åŒ–
             if (vis[j] && dis[j] < dis[p]) p = j;
         if (p == 0) break;
         vis[p] = true;
