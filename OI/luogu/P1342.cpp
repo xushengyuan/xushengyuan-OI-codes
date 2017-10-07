@@ -45,6 +45,7 @@ il ll dij1()
     while(!heap.empty())
     {
         pair<int,int> p=heap.front();
+        cout<<p.second<<endl;
         pop_heap(heap.begin(),heap.end());
         heap.pop_back();
         dis[p.second]=p.first;
@@ -102,7 +103,7 @@ int main()
 {
     //#ifdef _DEBUG
         freopen("in.txt","r",stdin);
-        freopen("out.txt","w",stdout);
+        //freopen("out.txt","w",stdout);
     //#endif
     cin>>n>>m;
     int u,v,w;

@@ -1,6 +1,11 @@
+//Date:2017/9/25
+//OJ:luogu	
+//Problem:2747
+//Solution:DP
+//By:xushengyuan
 #include <bits/stdc++.h>
-#define MAXN 110
 using namespace std;
+#define MAXN 110
 bool _map[MAXN][MAXN];
 int f[MAXN][MAXN];
 map<string,int> mp;

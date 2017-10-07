@@ -1,3 +1,8 @@
+//Date:2017/9/25
+//OJ:luogu
+//Problem:2296
+//Solution:BFS*2
+//By:xushengyuan
 #include <bits/stdc++.h>
 #define MAXN 10010
 using namespace std;
