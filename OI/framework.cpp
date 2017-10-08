@@ -23,7 +23,7 @@ int main()
 {
     #ifdef _DEBUG
         freopen("in.txt","r",stdin);
-        //freopen("out.txt","w",stdout);
+        freopen("out.txt","w",stdout);
     #endif
     
     return 0;
