@@ -24,7 +24,7 @@ void tarjan(int u)
 		{
 			tmp=sta[--top];
 			//vis[tmp]=0;这里写错了。
-			insta[tmp]=0;//应该是把在栈中的标记取消。
+			insta[tmp]=0;//应该是把在栈中的标记取消.
 			id[tmp]=scnt;
 		}
 		while(tmp!=u);
