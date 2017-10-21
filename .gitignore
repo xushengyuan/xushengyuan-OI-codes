@@ -1,2 +1,6 @@
 *.exe
 *.txt
+*.ini
+*.json
+*.db
+.vscode
