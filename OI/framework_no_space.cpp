@@ -4,6 +4,7 @@
 //Solution: 
 //By:xushengyuan
 #include <bits/stdc++.h>
+#define _DEBUG
 using namespace std;
 int read_int()
 {
