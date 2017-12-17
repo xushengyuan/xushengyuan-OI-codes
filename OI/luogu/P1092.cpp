@@ -74,8 +74,9 @@ void dfs(int x,int y,int add)
 int main()
 {
     freopen("in.txt","r",stdin);
+    freopen("out.txt","w",stdout);
     cin>>n;
-    cin>>sa>>sb>sc;
+    cin>>sa>>sb>>sc;
     memset(visit,0,sizeof(visit));
     for(int i=0;i<n;i++)
         tmp[i]=-1;
