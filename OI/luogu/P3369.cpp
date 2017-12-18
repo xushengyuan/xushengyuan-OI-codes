@@ -6,7 +6,7 @@ struct point
 	int left,right,num,weight,re,pos;
 }tree[MAXN];
 int m,root,result,tree_size;
-void l_r(int &x)
+void l_r(int &x) 
 {
 	int xr=tree[x].right;
 	tree[x].right=tree[xr].left;
