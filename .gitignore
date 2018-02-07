@@ -1,10 +1,9 @@
 *.exe
 *.txt
 *.ini
-<<<<<<< HEAD
 *.json
 *.db
 .vscode
-=======
 *.conf
->>>>>>> 44f5a7ac2e368431e5a82d266e16cbb557fea04a
+in.txt
+out.txt
