@@ -1,26 +1,20 @@
-//Date:2017/11/17
+//Date:2018/2/8
 //OJ:luogu
-//Problem:1052
-//Solution: DP
+//Problem:1441
+//Solution:
 //By:xushengyuan
 #include <bits/stdc++.h>
+#define MAXN 1000010
 #define _DEBUG
-#define MAXN 110
-#define MO 2520
 using namespace std;
-int l,s,t,m;
-int data[MAXN],
+int n,m;
 int main()
 {
     #ifdef _DEBUG
         freopen("in.txt","r",stdin);
         freopen("out.txt","w",stdout);
     #endif
-    cin>>l>>s>>t>>m;
-    for(int i=0;i<m;i++)
-    {
-        cin>>tm
-        
-    }
+    cin>>n>>m;
+    
     return 0;
 }

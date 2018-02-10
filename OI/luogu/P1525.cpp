@@ -1,26 +1,27 @@
-//Date:2017/11/17
+//Date:2018/2/10
 //OJ:luogu
-//Problem:1052
-//Solution: DP
+//Problem:1525
+//Solution:
 //By:xushengyuan
 #include <bits/stdc++.h>
+#define MAXN 1000100
 #define _DEBUG
-#define MAXN 110
-#define MO 2520
 using namespace std;
-int l,s,t,m;
-int data[MAXN],
+int n,m;
+struct edge
+{
+    int u,v,w;
+}edges[MAXN];
+bool operator <(edge a,edge b)
+{
+    return a.w<b.w;
+}
 int main()
 {
     #ifdef _DEBUG
         freopen("in.txt","r",stdin);
         freopen("out.txt","w",stdout);
     #endif
-    cin>>l>>s>>t>>m;
-    for(int i=0;i<m;i++)
-    {
-        cin>>tm
-        
-    }
+    
     return 0;
 }

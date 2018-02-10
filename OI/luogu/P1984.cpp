@@ -1,26 +1,26 @@
-//Date:2017/11/17
+//Date:2018/2/9
 //OJ:luogu
-//Problem:1052
-//Solution: DP
+//Problem:1984
+//Solution:
 //By:xushengyuan
 #include <bits/stdc++.h>
+#define Q 420000.0/n
 #define _DEBUG
-#define MAXN 110
-#define MO 2520
 using namespace std;
-int l,s,t,m;
-int data[MAXN],
+int n;
 int main()
 {
     #ifdef _DEBUG
         freopen("in.txt","r",stdin);
         freopen("out.txt","w",stdout);
     #endif
-    cin>>l>>s>>t>>m;
-    for(int i=0;i<m;i++)
+    cin>>n;
+    double t=Q,result=0;
+    for (int i = 1; i <= n; i++)
     {
-        cin>>tm
-        
+        result+=t;
+        t=t*(1.0-1.0/(double)(2*i));
     }
+    printf("%.2lf",result);
     return 0;
 }

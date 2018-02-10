@@ -12,38 +12,14 @@ struct task
 {
     int id;
     int begin,during;
-    int pro;
+    int pri;
 };
-int n=0;
-int read_int()
-{
-    int result=0;
-    char t;
-    t=getchar();
-    while(!isdigit(t))
-        t=getchar();
-    while(isdigit(t))
-    {
-        result=result*10+t-'0';
-        t=getchar();
-    }
-    return result;
-}
 bool cmp(task a,task b)
 {
-    if(a.pro != b.pro)
-        return a.pro<b.pro;
+    if(a.pri != b.pri)
+        return a.pri<b.pri;
     else
         return a.begin>b.begin;
-}
-task read_task()
-{
-    task result;
-    result.id=read_int();
-    result.begin=read_int();
-    result.during=read_int();
-    result.pro=read_int();
-    return task;
 }
 int main()
 {
@@ -51,6 +27,29 @@ int main()
         freopen("in.txt","r",stdin);
         freopen("out.txt","w",stdout);
     #endif
-    
+    int id,begin,during,pri,time;
+    while(scanf("%d%d%d%d",&id,&begin,&during,&pri)!+EOF)
+    {
+        while(!q.empty())
+        {
+            task p=q.top();
+            q.pop();
+            if(time>=begin-q.during)
+            {
+                q.push({p.id,p.begin,.during-(begin-time),p.pri});
+                break;
+            }
+            else
+                cout<<p.id<<' '<<time=time+p.during;
+        }
+        time=begin;
+        q.push({id,begin,during,pri});
+    }
+    while(!q.empty())
+    {
+        task p=q.top();
+        q.pop();
+        cout<<p.id<<' '<<time=time+p.during;
+    }
     return 0;
 }
