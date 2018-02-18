@@ -5,6 +5,7 @@
 //By:xushengyuan
 #include <bits/stdc++.h>
 #define MAXN 20020
+#define _DEBUG
 using namespace std;
 int e[12];
 struct p
@@ -39,7 +40,7 @@ int main()
     cout <<endl;*/
     for(int i=0;i<n;i++)
     {
-        people[i].c=(i+1)%10 +1 ;
+        people[i].c=i%10 +1 ;
         people[i].w+=e[people[i].c];
     }
     sort(people,people+n,cmp);
