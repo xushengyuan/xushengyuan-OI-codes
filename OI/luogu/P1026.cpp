@@ -41,7 +41,7 @@ void init()
             if(vis[j])
                 continue;
             int pl=words[i].len;
-
+            
         }
 }
 int main()
