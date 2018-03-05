@@ -4,7 +4,7 @@
 //By:xushengyuan
 #include <bits/stdc++.h>
 #define _DEBUG
-#define MAXN 110
+#define MAXN 1100
 using namespace std;
 int d,g;
 struct rubbish
@@ -15,7 +15,7 @@ bool cmp(rubbish a,rubbish b)
 {
     return a.t<b.t;
 }
-bool f[500][5000];
+bool f[5000][5000];
 int main()
 {
     #ifdef _DEBUG
