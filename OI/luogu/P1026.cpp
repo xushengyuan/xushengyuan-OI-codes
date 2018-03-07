@@ -11,7 +11,7 @@
 using namespace std;
 int p,k,s;
 int f[MAXN][MAXN],cot[MAXN][MAXN];
-int hashs[10];
+int words_hash[10];
 string words[10];
 char ch[210];
 int hash(string str)
@@ -31,7 +31,11 @@ bool check(int x,int l,int r)
     else
         return false;
 }
-bool vis[210];
+int dp()
+{
+
+}
+int  vis[210];
 void init()
 {
     memset(vis,0,sizeof(vis));
@@ -59,8 +63,9 @@ int main()
     for(int i=0;i<s;i++)
     {
         cin>>words[i];
-        hashs[i]=hash(words[i]);
+        words_hash[i]=hash(words[i]);
     }
     init();
+    cout<<dp();
     return 0;
 }

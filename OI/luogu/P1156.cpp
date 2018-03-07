@@ -15,7 +15,7 @@ bool cmp(rubbish a,rubbish b)
 {
     return a.t<b.t;
 }
-bool f[5000][5000];
+bool f[110][5000];
 int main()
 {
     #ifdef _DEBUG
@@ -46,7 +46,7 @@ int main()
                 if(high+data[p].h>=d)
                 {
                     cout<<data[p].t;
-                    return 0;
+                    exit(0);
                 }
             }
     for(int i=10+sum;i>0;i--)
