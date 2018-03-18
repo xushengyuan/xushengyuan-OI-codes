@@ -9,63 +9,81 @@
 #define MAXN 210
 #define MOD 1000007
 using namespace std;
-int p,k,s;
-int f[MAXN][MAXN],cot[MAXN][MAXN];
+int p, _k, s;
+int f[MAXN][MAXN], cot[MAXN][MAXN];
 int words_hash[10];
 string words[10];
 char ch[210];
-int hash(string str)
+int _hash(string str)
 {
-    int result=0;
-    for(int i=0;i<str.len();i++)
-        result=(result*97+str[i]+i)%MOD;
+    int result = 0;
+    for (int i = 0; i < str.length(); i++)
+        result = (result * 97 + str[i]) % MOD;
     return result;
-}
-bool check(int x,int l,int r)
-{
-    string tmp;
-    for(int i=l;i<=r;i++)
-        tmp.push_back(ch[i]);
-    if(hash(tmp)==x)
-        return true;
-    else
-        return false;
 }
 int dp()
 {
-
+    memset(f, 0, sizeof(f));
+    for (int k = 1; k <= _k; k++)
+        for (int i = 1; i <= p * 20; i++)
+            for (int j = k - 1; j < i; j++)
+                f[i][k] = max(f[i][k], f[j][k - 1] + cot[j][i - 1]);
+    return f[p * 20][_k];
 }
-int  vis[210];
+int hashs[MAXN][MAXN];
+bool vis[MAXN];
 void init()
 {
-    memset(vis,0,sizeof(vis));
-    for(int i=0;i<s;i++)
-        for(int j=0;j<p*20;j++)
+    memset(hashs, 0, sizeof(hashs));
+    memset(cot, 0, sizeof(cot));
+    memset(vis, 0, sizeof(vis));
+    for (int i = 0; i < p * 20; i++)
+    {
+        int t = 0;
+        for (int j = i; j < p * 20; j++)
         {
-            if(vis[j])
-                continue;
-            int pl=words[i].len;
-            
+            t = (t * 97 + ch[j]) % MOD;
+            hashs[i][j] = t;
         }
+    }
+    for (int i = 0; i < p * 20; i++)
+    {
+        for (int j = i; j < p * 20; j++)
+        {
+            memset(vis, 0, sizeof(vis));
+            for (int k = 0; k < s; k++)
+            {
+                int len = words[k].length();
+                if (len > j - 1 + 1)
+                    continue;
+                for (int t = i; t <= j - len + 1; t++)
+                    if (!vis[t] && hashs[t][t + len - 1] == words_hash[k])
+                    {
+                        vis[t] = true;
+                        cot[i][j]++;
+                    }
+            }
+        }
+    }
+    return;
 }
 int main()
 {
-    #ifdef _DEBUG
-        freopen("in.txt","r",stdin);
-        freopen("out.txt","w",stdout);
-    #endif
-    cin>>p>>k;
-    int pp=0;
-    for(int i=0;i<p;i++)
-        for(int j=0;j<20;j++,pp++)
-            cin>>ch[pp];
-    cin>>s;
-    for(int i=0;i<s;i++)
-    {
-        cin>>words[i];
-        words_hash[i]=hash(words[i]);
-    }
+#ifdef _DEBUG
+    freopen("in.txt", "r", stdin);
+    freopen("out.txt", "w", stdout);
+#endif
+    cin >> p >> _k;
+    int pp = 0;
+    for (int i = 0; i < p; i++)
+        for (int j = 0; j < 20; j++, pp++)
+            cin >> ch[pp];
+    cin >> s;
+    for (int i = 0; i < s; i++)
+        cin >> words[i];
+    for (int i = 0; i < s; i++)
+        words_hash[i] = _hash(words[i]);
     init();
-    cout<<dp();
+    cout << dp();
     return 0;
 }
