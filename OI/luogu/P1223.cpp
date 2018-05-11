@@ -15,8 +15,8 @@ bool cmp(people a,people b)
 }
 int main()
 {
-    //freopen("in.txt","r",stdin);
-    //freopen("out.txt","w",stdout);
+    freopen("in.txt","r",stdin);
+    freopen("out.txt","w",stdout);
     int i,j,pre=0;
     cin>>n;
     for(i=0;i<n;i++)
