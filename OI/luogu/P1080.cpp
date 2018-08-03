@@ -1,3 +1,5 @@
+// luogu-judger-enable-o2
+// luogu-judger-enable-o2
 #include<iostream>
 #include<cstdio>
 #include<cstring>

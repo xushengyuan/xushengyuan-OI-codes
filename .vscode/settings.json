@@ -1,4 +1,23 @@
 // 将设置放入此文件中以覆盖默认值和用户设置。
 {
-    "C_Cpp.errorSquiggles": "Disabled"
+    "C_Cpp.errorSquiggles": "Disabled",
+    "files.associations": {
+        "cstddef": "cpp",
+        "cstdlib": "cpp",
+        "initializer_list": "cpp",
+        "type_traits": "cpp",
+        "xstddef": "cpp",
+        "xtr1common": "cpp",
+        "xiosbase": "cpp",
+        "ostream": "cpp",
+        "iostream": "cpp",
+        "xstring": "cpp",
+        "xutility": "cpp",
+        "utility": "cpp",
+        "algorithm": "cpp",
+        "limits": "cpp",
+        "vector": "cpp",
+        "iosfwd": "cpp",
+        "xlocale": "cpp"
+    }
 }

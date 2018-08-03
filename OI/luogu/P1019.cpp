@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<string.h>
+#define _DEBUG
 char word[22][20],temp;
 char str_temp[20];
 int v[22],a[22][22],link[22][22],n,long_max=0,ge,z;
@@ -33,7 +34,7 @@ int dfs(int si,int len)
             v[i]--;
         }
 }
-int link_set()//ÁÚ½Ó¾ØÕó
+int link_set()
 {
     int i,j,k;
     for(i=1; i<=n; i++)
@@ -49,7 +50,7 @@ int link_set()//ÁÚ½Ó¾ØÕó
     }
     return 0;
 }
-int    link_fill(int n)//³õÊ¼»¯
+int    link_fill(int n)
 {
     int i,j;
     for(i=0; i<n; i++)
@@ -59,16 +60,22 @@ int    link_fill(int n)//³õÊ¼»¯
 }
 int main()
 {
+
+    #ifdef _DEBUG
+        freopen("in.txt","r",stdin);
+        freopen("out.txt","w",stdout);
+    #endif
     int i,j;
-    scanf("%d",&n);//ÊäÈë
+    scanf("%d",&n);
     for(i=1; i<=n; i++)
     {
         scanf("%s",word[i]);
         v[i]=0;
     }
-    scanf("%s",str_temp);
     link_fill(0);
     link_set();
+    memset(str_temp,0,sizeof(str_temp));
+    scanf("%s",str_temp);
     temp=str_temp[0];
     for(i=1; i<=n; i++)
         if (word[i][0]==temp)

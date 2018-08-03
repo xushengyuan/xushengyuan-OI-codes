@@ -76,7 +76,7 @@ int main()
 {
     //#ifdef _DEBUG
         freopen("in.txt","r",stdin);
-        //freopen("out.txt","w",stdout);
+        freopen("out.txt","w",stdout);
     //#endif
     cin>>n>>m;
     for(int i=0;i<n;i++)
@@ -104,19 +104,20 @@ int main()
 			{
 			q.push({0,i});
 			BFS();
-			for(int a=0;a<n;a++)
+			/*for(int a=0;a<n;a++)
 			{
 				for(int b=0;b<m;b++)
 					cout<<vis[a][b]<<' ';
 				cout <<endl;
-			}
+			}*/
+            segs[segsum].first=-1;
 			for(int j=0;j<m;j++)
 				if(vis[n-1][j])
 				{
 					segs[segsum].first=j;
 					break;
 				}
-				segs[segsum].second=-1;
+			segs[segsum].second=-1;
 			for(int j=segs[segsum].first;j<m;j++)
 				if(!vis[n-1][j])
 				{
@@ -125,7 +126,9 @@ int main()
 				}
 			if(segs[segsum].second==-1)
 				segs[segsum].second=m-1;
-			cout<<segs[segsum].first<<'-'<<segs[segsum].second<<endl;
+            if(segs[segsum].first==-1)
+                continue;
+			//cout<<segs[segsum].first<<'-'<<segs[segsum].second<<endl;
 			segs[segsum].first++,segs[segsum].second++;
 			segsum++;
 			}
