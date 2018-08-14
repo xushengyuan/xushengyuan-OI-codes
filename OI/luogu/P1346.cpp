@@ -1,96 +1,43 @@
-//Date:2017/8/24
+//Date:2018/8/5
 //OJ:luogu
 //Problem:1346
-//Solution:Dijkstra
+//Solution:floyd
 //By:xushengyuan
 #include <bits/stdc++.h>
+#define MAXN 110
+#define _DEBUG
+int g[MAXN][MAXN];
+int n,a,b;
 using namespace std;
-int n,a,b,m=0;
-vector<int> _map[110];
-struct edge
-{
-    int u,v,w;
-}edges[20100];
-struct point
-{
-    int n,d=0x7fffffff;
-};
-bool operator < (const point &a,const point &b)
-{
-    return a.d>b.d;
-}
-priority_queue<point> q;
-int d[110]={0x7fffffff};
-bool visit[110]={false};
 int main()
 {
-    //#ifdef _DEBUG
+    #ifdef _DEBUG
         freopen("in.txt","r",stdin);
-        //freopen("out.txt","w",stdout);
-    //#endif
-    cin >>n>>a>>b;
-    a--;
-    b--;
-    fill(d,d+110,0x7fffffff);
-    for(int i=0;i<n;i++)
+        freopen("out.txt","w",stdout);
+    #endif
+    cin>>n>>a>>b;
+    memset(g,0x3f,sizeof(g));
+    for(int i=1;i<=n;i++)
     {
-        int t;
-        edge tmp;
-        cin >>t;
-        tmp.u=i;
-        if(t>0)
-            for(int j=0;j<t;j++)
-            {
-                cin >>tmp.v;
-                tmp.v--;
-                if(j==0)
-                    tmp.w=0;
-                else
-                    tmp.w=1;
-                _map[tmp.u].push_back(m);
-                //cout <<_map[tmp.u].size()<<endl;
-                edges[m++]=tmp;
-                if(tmp.u!=tmp.v)
-                {
-                    tmp.u=tmp.v;
-                    tmp.v=i;
-                    tmp.w=1;
-                    _map[tmp.u].push_back(m);
-                    edges[m++]=tmp;
-                }
-            } 
-    }
-    point t_p;
-    t_p.n=a;
-    t_p.d=0;
-    d[a]=0;
-    q.push(t_p);
-    while(!q.empty())
-    {
-        point p=q.top();
-        cout <<p.d<<' ';
-        q.pop();
-        if(!visit[p.n])
+        int t,tmp;
+        cin>>t;
+        g[i][i]=0;
+        for(int j=1;j<=t;j++)
         {
-            visit[p.n]=true;
-            for(int i=0;i<_map[p.n].size();i++)
-            {
-                if(p.d+(i!=0) < d[edges[_map[p.n][i]].v])
-                { 
-                    d[edges[_map[p.n][i]].v]=p.d+(i!=0);
-                    cout <<i<<endl;
-                    t_p.n=edges[_map[p.n][i]].v;
-                    t_p.d=d[edges[_map[p.n][i]].v];
-                    q.push(t_p);
-                }
-            }
+            cin>>tmp;
+            if(j==1)
+                g[i][tmp]=0;
+            else
+                g[i][tmp]=1;
         }
     }
-    cout <<endl;
-    if(d[b]==0x7fffffff)
+    for(int k=1;k<=n;k++)
+        for(int i=1;i<=n;i++)
+            for(int j=1;j<=n;j++)   
+                g[i][j]=min(g[i][j],g[i][k]+g[k][j]);
+    if(g[a][b]==0x3f3f3f3f)
         cout<<-1;
     else
-        cout <<d[b];
+        cout<<g[a][b];
     return 0;
 }
-
