@@ -1,65 +1,60 @@
+//Date:2018/8/19
+//OJ:luogu
+//Problem:3389
+//Solution:Gaussian Elimination
+//By:xushengyuan
 #include <bits/stdc++.h>
+#define _DEBUG
 #define MAXN 100
 #define EPS 0.000000001
 using namespace std;
 typedef double Mat[MAXN][MAXN];
 Mat m;
 int n;
-double sol[MAXN];
 void gauss()
 {
     double ratio;
-    int a,b,c;
-    for(a=1;a<=n;a++)
+    int i;
+    for(i=1;i<=n;i++)
     {
-        if(fabs(m[a][a])<=EPS)
-            for(int b=a+1;b<n;b++)
-                if(fabs(m[b][a])<=EPS)
-                {
-                    swap(m[a],m[b]);
-                    break;
-                }
-        for( b=a+1;b<=n)
-        {
-            ratio = m[b][a]/m[a][a];
-            for( c=a;c<=n+1;c++)
-                m[b][c]-=,[a][c]*ratio;
-        }
-        if(m[a][a]==0)
+        int t=i;
+        for(int j=i;j<=n;j++)
+            if(fabs(m[j][i]-m[t][i])<=EPS)
+                t=j;
+        for(int j=1;j<=n+1;j++)
+            swap(m[i][j],m[t][j]);
+        if(fabs(m[i][i])<=EPS)
         {
             cout <<"No Solution";
             exit(0);
         }
-    }
-    for(a=n;a>=1;a--)
-    {
-        sol[a]=m[a][n+1];
-        for( b=a+1;b<=n;b++)
-            sol[a]-=m[a][b] *sol[b];
-        sol[a]/=m[a][a];
+        /*for(int ii=1;ii<=n;ii++)
+        {
+            for(int jj=1;jj<=n;jj++)
+                cout <<m[ii][jj]<<' ';
+            cout<<endl;
+        }
+        cout<<endl;*/
+        for(int j=i+1;j<=n+1;j++)
+            m[i][j]/=m[i][i];
+        for(int j=1;j<=n;j++)
+            if(i!=j)
+                for(int k=i+1;k<=n+1;k++)
+                    m[j][k]-=m[j][i]*m[i][k];
     }
 }
-int read_int()
-{
-    int result=0;
-    char t;
-    t=getchar();
-    while(isdigit(t))
-    {
-        result=result*10+t-'0';
-        t=getchar();
-    }
-    return result;
-} 
 int main()
 {
-    freopen("in.txt","r",stdin);
-    n=read_int();
+    #ifdef _DEBUG
+        freopen("in.txt","r",stdin);
+        freopen("out.txt","w",stdout);
+    #endif
+    cin>>n;
     for(int i=1;i<=n;i++)
-        for(int j=1;j<=n;j++)
-            m[i][j]=read_int();
+        for(int j=1;j<=n+1;j++)
+            cin>>m[i][j];
     gauss();
     if(m[n][n]!=0)
         for(int i=1;i<=n;i++)
-            cout <<sol[i]<<endl;
+            printf("%.2lf\n",m[i][n+1]);
 }

@@ -109,36 +109,7 @@ int main()
     for(int i=0;i<q;i++)
     {
         int u=read_int(),v=read_int(),ans=0x7fffffff;
-        if(find(u)!=find(v))
-        {
-            cout<<-1<<endl;
-            continue;
-        }
-        if(depth[u]<depth[v])
-        {
-            dep_u=depth[v],dep_v=depth[u];
-            int t=u;
-            u=v,v=t;
-        }
-        else
-            dep_u=depth[u],dep_v=depth[v];
-        int p=u,q=v;
-        while(dep_u!=dep_v)
-        {
-            ans=min(ans,dad_weight[u]);
-            p=dad[p];
-            dep_u--;
-        }
-        while(p!=q)
-        {
-            ans=min(ans,dad_weight[u]);
-            p=dad[p];
-            dep_u--;
-            ans=min(ans,dad_weight[v]);
-            q=dad[v];
-            dep_v--;
-        }
-        cout<<ans<<endl;
+        
     }
     return 0;
 }
