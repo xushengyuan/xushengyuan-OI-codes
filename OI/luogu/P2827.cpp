@@ -1,111 +1,79 @@
-//Date:2017/9/15
+//Date:2018/9/6
 //OJ:luogu
 //Problem:2827
-//Solution: queue
+//Solution:Queue
 //By:xushengyuan
 #include <bits/stdc++.h>
+#define _DEBUG
 #define MAXN 100010
 using namespace std;
-pair<int,int> que[3][MAXN*100];
-int front[3]={0},tail[3]={0};
 int n,m,q,u,v,t;
-double p;
+int data[MAXN];
+queue<int>Q[2];
 int read_int()
 {
     int result=0;
-    char tt;
-    tt=getchar();
-    while(!isdigit(tt))
+    char t=getchar();
+    while(!isdigit(t))
         t=getchar();
-    while(isdigit(tt))
+    while(isdigit(t))
     {
-        result=result*10+tt-'0';
-        tt=getchar();
+        result=result*10+t-'0';
+        t=getchar();
     }
     return result;
 }
-void cut(int len,int time)
-{
-    int left=p*len;
-    int right=len-left;
-
-    //cout <<len<<':'<<left<<' '<<right<<endl;
-    que[1][tail[1]++]={left,time};
-    que[2][tail[2]++]={right,time};
-    /*for(int i=0;i<3;i++)
-    {
-    	for(int j=front[i];j<tail[i];j++)
-    	{
-    		int len=que[i][j].first+(time-que[i][j].second)*q;
-    		cout <<len<<' ';
-    	}
-    	cout <<endl;
-	}*/
-	
-}
-int find_max(int time)
-{
-    int mx=-0x7fffffff,mxn,len;
-    for(int i=0;i<3;i++)
-    {
-    	if(front[i]==tail[i])
-    		continue;
-        len=que[i][front[i]].first+(time-que[i][front[i]].second)*q;
-        if(len>mx)
-        {
-            mx=len;
-            mxn=i;
-        }
-    }
-    front[mxn]++;
-    cut(mx,time+1);    
-    return mx;
-}
-bool cmp(int a,int b)
-{
-	return a>b;
-}
-bool cmp_p(pair<int,int> a,pair<int,int> b)
-{
-	return a.first>b.first;
-}
 int main()
 {
-    //#ifdef _DEBUG
+    #ifdef _DEBUG
         freopen("in.txt","r",stdin);
-        //freopen("out.txt","w",stdout);
-    //#endif
+        freopen("out.txt","w",stdout);
+    #endif
     cin>>n>>m>>q>>u>>v>>t;
-    
-    p=(double)u/(double)v;
+    double p=(double)u/(double)v;
     for(int i=0;i<n;i++)
+        data[i]=read_int();
+    sort(data,data+n,greater<int>());
+    int pp=0,s=0;
+    for(int i=1;i<=m;i++)
     {
-    	int tt;
-    	cin>>tt;
-    	que[0][tail[0]++]={tt,0};
-	}
-	sort(&que[0][0],&que[0][tail[0]-1],cmp_p);
-    for(int i=0;i<m;i++)
-    	if((i+1)%t==0)
-    		cout<<find_max(i)<<' ';
-    	else
-    		find_max(i);
-    cout <<endl;
-    vector<int> arr;
-    for(int i=0;i<3;i++)
+        int Max=0;
+        if(Q[0].front()>=Q[1].front() && (pp>=n ||Q[0].front()>=data[pp]))
+        {Max=Q[0].front();Q[0].pop();}
+        else if(Q[0].front()<=Q[1].front() && (pp>=n||Q[1].front()>=data[pp]))
+        {Max=Q[1].front();Q[1].pop();}
+        else if(pp<n && Q[0].front()<=data[pp] && Q[1].front()<=data[pp])
+        {Max=data[pp];pp++;}
+        Max+=s;
+        if(i%t==0)
+             printf("%d ",Max);
+        int len1=floor(p*(double)Max),len2=Max-len1;
+        s+=q;
+        len1-=s,len2-=s;
+        Q[0].push(len1);
+        Q[1].push(len2);
+        //cout<<n-pp+Q[0].size()+Q[1].size()<<endl;
+    }
+    vector<int>all;
+    //cout<<Q[0].size()+Q[1].size()<<endl;
+    while(!Q[0].empty())
     {
-    	if(front[i]==tail[i])
-    		continue;
-    	for(int j=front[i];j<tail[i];j++)
-    	{
-    		int len=que[i][j].first+(m-que[i][j].second)*q;
-    		arr.push_back(len);
-    		//cout <<len<<' ';
-    	}
-    	//cout <<endl;
-	}
-    sort(arr.begin(),arr.end(),cmp);
-    for(int i=t;i<=arr.size();i+=t)
-    	cout <<arr[i-1]<<' ';
+        all.push_back(Q[0].front());
+        Q[0].pop();
+    }
+    //cout<<all.size()<<endl;
+    while(!Q[1].empty())
+    {
+        all.push_back(Q[1].front());
+        Q[1].pop();
+    }
+    //cout<<all.size()<<endl;
+    for(int i=pp;i<n;i++)
+        all.push_back(data[i]);
+    sort(all.begin(),all.end(),greater<int>());
+    cout<<endl;
+    for(int i=0;i<all.size();i++)
+        if((i+1)%t==0)
+            printf("%d ",all[i]+s);
     return 0;
 }

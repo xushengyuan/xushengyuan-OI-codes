@@ -4,77 +4,64 @@
 //Solution:
 //By:xushengyuan
 #include <bits/stdc++.h>
-#define MAXN 101000
+#define MAXN 1000100
+#define _DEBUG
 using namespace std;
-long long sum[MAXN<<2],add[MAXN<<2];
+long long Min[MAXN<<2],add[MAXN<<2];
 long long data[MAXN];
 long long n,m;
 void buildST(long long left,long long right,long long p)
 {
     if(left==right)
     {
-        sum[p]=data[left];
+        Min[p]=data[left];
         return ;
     }
-    long long mid=(left+right)/2;
-    buildST(left,mid,p*2);
-    buildST(mid+1,right,p*2+1);
-    sum[p]=sum[p*2]+sum[p*2+1];
+    register long long mid=(left+right) >>1;
+    buildST(left,mid,(p<<1));
+    buildST(mid+1,right,(p<<1)+1);
+    Min[p]=min(Min[p<<1],Min[(p<<1)+1]);
 }
-void  point_change(long long m,long long ad,long long left,long long right,long long p)
-{
-    if(left==right)
-    {
-        sum[p]+=ad;
-        return ;
-    }
-    long long mid=(left+right)/2;
-    if(m<=mid)
-        point_change(m,ad,left,mid,p*2);
-    else
-        point_change(m,ad,mid+1,right,p*2+1);
-    sum[p]=sum[p*2]+sum[p*2+1];
-}
-void update_down(long long len_l,long long len_r,long long p)
+inline void update_down(long long len_l,long long len_r,long long p)
 {
     if(add[p]==0) return ;
-    add[p*2]+=add[p];
-    add[p*2+1]+=add[p];
-    sum[p*2]+=add[p]*len_l;
-    sum[p*2+1]+=add[p]*len_r;
+    add[p<<1]+=add[p];
+    add[(p<<1)+1]+=add[p];
+    Min[p<<1]+=add[p];
+    Min[(p<<1)+1]+=add[p];
     add[p]=0;
 }
 void seg_change(long long m_left,long long m_right,long long ad,long long left,long long right,long long p)
 {
     if(m_left <= left && right <= m_right)
     {
-        sum[p]+=ad*(right - left + 1);
+        Min[p]+=ad;
         add[p]+=ad;
         return;
     }
-    long long mid =(left + right)/2;
+    register long long mid =(left + right) >>1;
     update_down(mid-left+1,right-mid,p);
     if(m_left <= mid)
-        seg_change(m_left,m_right,ad,left,mid,p*2);
+        seg_change(m_left,m_right,ad,left,mid,p<<1);
     if(m_right > mid )
-        seg_change(m_left,m_right,ad,mid+1,right,p*2+1);
-    sum[p]=sum[p*2]+sum[p*2+1];
+        seg_change(m_left,m_right,ad,mid+1,right,(p<<1)+1);
+    Min[p]=min(Min[p<<1],Min[(p<<1)+1]);
     return;
 }
 long long seg_que(long long m_left,long long m_right,long long left,long long right,long long p)
 {
     if(m_left <= left && right <= m_right) 
-        return sum[p];
-    long long mid =(right + left) / 2;
+        return Min[p];
+    register long long mid =(right + left) >>1;
     update_down(mid-left+1,right-mid,p);
-    long long result=0;
+    long long result=0x7ffffffffff;
     if(m_left <= mid)
-        result+=seg_que(m_left,m_right,left,mid,p*2);
+        result=min(result,seg_que(m_left,m_right,left,mid,p<<1));
     if(m_right > mid)
-        result+=seg_que(m_left,m_right,mid+1,right,p*2+1);
+        result=min(result,seg_que(m_left,m_right,mid+1,right,(p<<1)+1));
     return result;
 }
-long long read_long()
+inline long long read_long()
 {
     long long result=0;
     char t;
@@ -95,28 +82,31 @@ int main()
         freopen("out.txt","w",stdout);
     #endif
     cin >>n>>m;
-    for(long long i=1;i<=n;i++)
+    for(register int i=1;i<=n;i++)
         data[i]=read_long();
     buildST(1,n,1);
-    long long t,x,y,k;
-    for(long long i=1;i<=m;i++)
+    register long long t,x,y,k;
+    for(register int i=1;i<=m;i++)
     {
         //for(long long j=1;j<=n;j++)
         //    cout <<seg_que(j,j,1,n,1)<<' ';
         //cout <<endl;
-        t=read_long();
+        t=-read_long();
         x=read_long();
         y=read_long();
-        if(t==1)
+        seg_change(x,y,t,1,n,1);
+        // for(int j=1;j<=n;j++)
+        //     cout<<seg_que(j,j,1,n,1)<<' ';
+        // cout<<endl;
+        int result=seg_que(x,y,1,n,1);
+        // cout<<result<<endl;
+        if(result<0)
         {
-            k=read_long();
-            seg_change(x,y,k,1,n,1);
-        }
-        else if(t==2)
-        {
-            cout <<seg_que(x,y,1,n,1)<<endl;
+            cout<<-1<<endl;
+            cout<<i<<endl;
+            exit(0);
         }
     }
-
+    cout<<0<<endl;
     return 0; 
 }

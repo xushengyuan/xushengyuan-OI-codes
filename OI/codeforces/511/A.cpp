@@ -1,28 +1,25 @@
-//Date:2018/10/5
-//OJ:luogu
-//Problem:1315
+//Date:2018/9/21
+//OJ:
+//Problem:
 //Solution:
 //By:xushengyuan
 #include <bits/stdc++.h>
-#define _DEBUG
-#define MAXN 1010
-#define MAXM 10010
-#define MAXN 0x3fffffff
+//#define _DEBUG
 using namespace std;
-struct edge
-{
-    int u,v,cost,cap;
-}edges[MAXN*4]
-struct people
-{
-    int 
-}
+int n;
 int main()
 {
     #ifdef _DEBUG
         freopen("in.txt","r",stdin);
         freopen("out.txt","w",stdout);
     #endif
-    
+    cin>>n;
+    int a=1,b=1,c=n-2;
+    if(c%3==0)
+    {
+        a=2;
+        c--;
+    }
+    cout<<a<<' '<<b<<' '<<c<<endl;
     return 0;
 }

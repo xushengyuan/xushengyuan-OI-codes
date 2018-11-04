@@ -1,22 +1,16 @@
-//Date:2018/10/5
-//OJ:luogu
-//Problem:1315
+//Date:
+//OJ:
+//Problem:
 //Solution:
 //By:xushengyuan
 #include <bits/stdc++.h>
 #define _DEBUG
-#define MAXN 1010
-#define MAXM 10010
-#define MAXN 0x3fffffff
+#define MAXN 110
+#define MAXM 12
 using namespace std;
-struct edge
-{
-    int u,v,cost,cap;
-}edges[MAXN*4]
-struct people
-{
-    int 
-}
+int n,m,K;
+int sum1[MAXN],sum2[MAXN];
+int f1[MAXN][MAXM],f2[MAXN][MAXN][MAXM];
 int main()
 {
     #ifdef _DEBUG

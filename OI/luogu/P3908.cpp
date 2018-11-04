@@ -1,28 +1,26 @@
-//Date:2018/10/5
+//Date:2018/10/26
 //OJ:luogu
-//Problem:1315
-//Solution:
+//Problem:39108
+//Solution:Math
 //By:xushengyuan
 #include <bits/stdc++.h>
 #define _DEBUG
-#define MAXN 1010
-#define MAXM 10010
-#define MAXN 0x3fffffff
 using namespace std;
-struct edge
-{
-    int u,v,cost,cap;
-}edges[MAXN*4]
-struct people
-{
-    int 
-}
+long long n,ans;
 int main()
 {
     #ifdef _DEBUG
         freopen("in.txt","r",stdin);
         freopen("out.txt","w",stdout);
     #endif
-    
+    cin>>n;
+    if(n%2==0)
+    {
+        n++;
+        ans=n;
+    }
+    if (((n + 1) / 2)%2!=0)
+        ans^=1;
+    cout<<ans;
     return 0;
 }
